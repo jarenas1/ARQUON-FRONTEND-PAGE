@@ -5,6 +5,8 @@ Sitio de una sola página para **ARQUON**, estudio de arquitectura y construcci�
 
 React 19 + TypeScript + Vite. Sin backend: el formulario se envía a Formspree y el contacto directo va por WhatsApp.
 
+> 🛠️ **¿Cómo se construyó este sitio?** Ver [`CASO-DESARROLLO.md`](./CASO-DESARROLLO.md) — memoria técnica del proceso con Claude Code, metodología Spec-Driven Development (SDD), orquestación multiagente, *skills* de diseño y el MCP de Higgsfield para el logo, las imágenes y el video del hero.
+
 ---
 
 ## Empezar
