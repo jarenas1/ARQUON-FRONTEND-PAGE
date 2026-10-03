@@ -1,0 +1,241 @@
+.hero {
+  position: relative;
+  height: 260svh;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.hero[data-static] {
+  height: 100svh;
+}
+
+.sticky {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  overflow: hidden;
+}
+
+.stage {
+  --gut: var(--gutter);
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- Foto / video ---------------------------------------------------------- */
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--olive-mist);
+  will-change: clip-path;
+  /* Antes de medir el escenario la foto no debe verse */
+  clip-path: inset(50%);
+}
+
+.mediaInner {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.mediaEl {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgb(0 0 0 / 0.62) 0%, rgb(0 0 0 / 0.18) 45%, rgb(0 0 0 / 0) 70%);
+  pointer-events: none;
+}
+
+/* ---- Dibujo ------------------------------------------------------------------ */
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  color: var(--ink);
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* ---- Eslogan ----------------------------------------------------------------- */
+.slogan {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-size: clamp(2.4rem, 6.1vw, 8.5rem);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.mask {
+  position: absolute;
+  top: calc(var(--ground-y) + clamp(16px, 2.4vh, 30px));
+  display: block;
+  overflow: hidden;
+  padding: 0.04em 0.04em 0.12em;
+  margin: -0.04em -0.04em 0;
+}
+
+.mask:first-child {
+  left: var(--gut);
+}
+
+.mask:last-child {
+  right: var(--gut);
+}
+
+.outline,
+.solid {
+  display: block;
+  white-space: nowrap;
+}
+
+/* Contorno: la idea todavía en papel */
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1.15px var(--ink);
+}
+
+/* Relleno: lo construido */
+.solid {
+  color: var(--ink);
+}
+
+/* ---- Anotaciones sobre la línea de tierra ----------------------------------- */
+.noteLeft,
+.noteRight {
+  position: absolute;
+  bottom: calc(100% - var(--ground-y) + 14px);
+  max-width: calc((100% - var(--fig-w)) / 2 - var(--gut) - 32px);
+  font-size: 0.875rem;
+  line-height: 1.35;
+  color: var(--ink-soft);
+}
+
+.noteLeft {
+  left: var(--gut);
+}
+
+.noteRight {
+  right: var(--gut);
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  text-align: right;
+}
+
+.cue {
+  position: relative;
+  width: 1px;
+  height: 34px;
+  background: var(--rule);
+  overflow: hidden;
+  flex: none;
+}
+
+.cue::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform-origin: top;
+  animation: cue 2.6s var(--ease-in-out) infinite;
+}
+
+@keyframes cue {
+  0% {
+    transform: scaleY(0);
+    transform-origin: top;
+  }
+  45% {
+    transform: scaleY(1);
+    transform-origin: top;
+  }
+  55% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+  100% {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+}
+
+/* ---- Texto sobre la foto ------------------------------------------------------ */
+.caption {
+  position: absolute;
+  left: var(--gut);
+  right: var(--gut);
+  bottom: clamp(28px, 7vh, 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+  color: var(--white);
+}
+
+.captionText {
+  max-width: 17ch;
+  font-size: var(--step-3);
+  font-weight: 350;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.captionLink {
+  flex: none;
+  padding: 6px 0;
+  font-size: var(--step-0);
+  border-bottom: 1px solid currentColor;
+  transition: opacity var(--dur-fast) ease;
+}
+
+.captionLink:hover {
+  opacity: 0.7;
+}
+
+.captionLink:focus-visible {
+  outline-color: var(--white);
+}
+
+/* ---- Pantallas angostas ---------------------------------------------------------- */
+@media (max-width: 859px) {
+  .slogan {
+    font-size: min(11.2vw, 4rem);
+  }
+
+  .mask:first-child {
+    top: calc(var(--fig-y) - 1.16em - 12px);
+  }
+
+  .mask:last-child {
+    left: var(--gut);
+    right: auto;
+    top: calc(var(--ground-y) + 12px);
+  }
+
+  .noteLeft {
+    display: none;
+  }
+
+  .noteRight {
+    bottom: max(20px, env(safe-area-inset-bottom));
+    right: auto;
+    left: var(--gut);
+    max-width: none;
+    flex-direction: row-reverse;
+    text-align: left;
+  }
+
+  .captionText {
+    font-size: clamp(1.75rem, 7.4vw, 2.5rem);
+  }
+}

@@ -1,0 +1,22 @@
+.rise {
+  position: relative;
+  overflow: hidden;
+}
+
+.riseClip,
+.riseInner {
+  position: absolute;
+  inset: 0;
+}
+
+.riseInner {
+  will-change: transform;
+}
+
+.line {
+  display: block;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform-origin: left center;
+}

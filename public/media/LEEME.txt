@@ -1,0 +1,1 @@
+Pon aquí el video del hero (hero.mp4 / hero.webm) y actívalo en src/config/site.ts.

@@ -1,0 +1,244 @@
+.card {
+  display: block;
+  color: var(--white);
+}
+
+.card:focus-visible {
+  outline-offset: 6px;
+}
+
+.frame {
+  position: relative;
+  overflow: hidden;
+  background: var(--olive-mist);
+}
+
+.rise {
+  position: absolute;
+  inset: 0;
+}
+
+.img {
+  transition: transform 1400ms var(--ease-out);
+}
+
+/* ---- Capa de hover --------------------------------------------------------- */
+.veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgb(26 28 15 / 0.86) 0%,
+    rgb(59 63 36 / 0.5) 52%,
+    rgb(59 63 36 / 0.28) 100%
+  );
+  opacity: 0;
+  transition: opacity 600ms var(--ease-out);
+}
+
+.dims {
+  --inset: clamp(14px, 1.6vw, 22px);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+/* Cota horizontal (arriba) */
+.dimH {
+  position: absolute;
+  top: calc(var(--inset) + 18px);
+  left: var(--inset);
+  right: calc(var(--inset) + 22px);
+  height: 1px;
+  background: rgb(255 255 255 / 0.9);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 900ms var(--ease-out);
+}
+
+/* Cota vertical (derecha) */
+.dimV {
+  position: absolute;
+  top: calc(var(--inset) + 40px);
+  bottom: var(--inset);
+  right: var(--inset);
+  width: 1px;
+  background: rgb(255 255 255 / 0.9);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 900ms var(--ease-out) 120ms;
+}
+
+/* Remates en diagonal en los extremos de cada cota, como en los planos */
+.dimH::before,
+.dimH::after,
+.dimV::before,
+.dimV::after {
+  content: '';
+  position: absolute;
+  width: 1px;
+  height: 11px;
+  background: currentColor;
+  color: var(--white);
+}
+
+.dimH::before,
+.dimH::after {
+  top: -5px;
+  transform: rotate(45deg);
+}
+.dimH::before {
+  left: 0;
+}
+.dimH::after {
+  right: 0;
+}
+
+.dimV::before,
+.dimV::after {
+  left: 0;
+  transform: rotate(45deg);
+}
+.dimV::before {
+  top: -5px;
+}
+.dimV::after {
+  bottom: -5px;
+}
+
+.dimLabel,
+.dimLabelV {
+  position: absolute;
+  font-size: 0.8125rem;
+  line-height: 1;
+  color: var(--white);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 400ms ease 350ms;
+}
+
+.dimLabel {
+  left: 50%;
+  bottom: 8px;
+  transform: translateX(-50%);
+}
+
+.dimLabelV {
+  top: 50%;
+  right: 9px;
+  writing-mode: vertical-rl;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* ---- Texto --------------------------------------------------------------- */
+.info {
+  position: absolute;
+  left: clamp(18px, 2vw, 32px);
+  right: clamp(56px, 6vw, 88px);
+  bottom: clamp(18px, 2vw, 32px);
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+}
+
+.meta,
+.name,
+.summary,
+.more {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 500ms var(--ease-out),
+    transform 700ms var(--ease-out);
+}
+
+.meta {
+  font-size: 0.875rem;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.name {
+  font-size: var(--step-3);
+  font-weight: 350;
+  letter-spacing: -0.025em;
+  line-height: 1.02;
+  transition-delay: 60ms;
+}
+
+.summary {
+  max-width: 36ch;
+  font-family: var(--font-serif);
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  transition-delay: 120ms;
+}
+
+.more {
+  margin-top: 8px;
+  padding-bottom: 3px;
+  font-size: 0.9375rem;
+  border-bottom: 1px solid currentColor;
+  transition-delay: 180ms;
+}
+
+/* ---- Pantallas táctiles: los datos van debajo de la foto ---------------------------------- */
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 16px;
+  padding-top: 14px;
+  color: var(--ink);
+}
+
+.captionName {
+  font-size: var(--step-2);
+  font-weight: 380;
+  letter-spacing: -0.015em;
+}
+
+.captionMeta {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+@media (hover: hover) {
+  .card:hover .veil,
+  .card:focus-visible .veil {
+    opacity: 1;
+  }
+  .card:hover .img,
+  .card:focus-visible .img {
+    transform: scale(1.04);
+  }
+  .card:hover .dimH,
+  .card:focus-visible .dimH {
+    transform: scaleX(1);
+  }
+  .card:hover .dimV,
+  .card:focus-visible .dimV {
+    transform: scaleY(1);
+  }
+  .card:hover :is(.dimLabel, .dimLabelV),
+  .card:focus-visible :is(.dimLabel, .dimLabelV) {
+    opacity: 1;
+  }
+  .card:hover :is(.meta, .name, .summary, .more),
+  .card:focus-visible :is(.meta, .name, .summary, .more) {
+    opacity: 1;
+    transform: none;
+  }
+  .caption {
+    display: none;
+  }
+}
+
+@media (hover: none) {
+  .info {
+    display: none;
+  }
+  .dims {
+    display: none;
+  }
+}

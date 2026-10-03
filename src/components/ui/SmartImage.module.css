@@ -1,0 +1,25 @@
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: var(--olive-mist);
+  transition: opacity 700ms var(--ease-out);
+}
+
+.img[data-state='loading'] {
+  opacity: 0;
+}
+
+.fallback {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  background: var(--olive-mist);
+  color: var(--olive-light);
+}
+
+.fallbackMark {
+  width: 32%;
+  max-width: 180px;
+}

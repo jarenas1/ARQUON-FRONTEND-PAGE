@@ -1,0 +1,144 @@
+.footer {
+  padding-block: clamp(40px, 6vw, 88px) clamp(28px, 4vw, 56px);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+/* Cajetín: marco exterior grueso, divisiones finas */
+.block {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  border: 1.5px solid var(--ink);
+}
+
+.cell {
+  grid-column: span 3;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: clamp(16px, 1.6vw, 24px);
+  border-right: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.brandCell {
+  grid-column: span 4;
+}
+
+.sloganCell {
+  grid-column: span 5;
+}
+
+.navCell {
+  grid-column: span 3;
+  border-right: 0;
+}
+
+.sheetCell {
+  border-right: 0;
+}
+
+/* La fila inferior no lleva borde abajo (lo pone el marco) */
+.cell:nth-last-child(-n + 4) {
+  border-bottom: 0;
+}
+
+.label {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+.brand {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: auto;
+}
+
+.mark {
+  width: auto;
+  height: clamp(64px, 7vw, 104px);
+}
+
+.word {
+  font-size: clamp(1.5rem, 2.4vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  line-height: 1;
+  margin-right: -0.2em;
+}
+
+.slogan {
+  margin-top: auto;
+  font-size: var(--step-3);
+  font-weight: 330;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+}
+
+.outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink);
+}
+
+.list {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9375rem;
+  overflow-wrap: anywhere;
+}
+
+.list a {
+  transition: color 200ms ease;
+}
+
+.list a:hover {
+  color: var(--olive);
+}
+
+.sheet {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9375rem;
+}
+
+@media (max-width: 1100px) {
+  .brandCell,
+  .sloganCell {
+    grid-column: span 6;
+  }
+  .sloganCell {
+    border-right: 0;
+  }
+  .navCell,
+  .cell {
+    grid-column: span 6;
+  }
+  .cell:nth-child(odd) {
+    border-right: 1px solid var(--ink);
+  }
+  .cell:nth-child(even) {
+    border-right: 0;
+  }
+  .cell:nth-last-child(-n + 4) {
+    border-bottom: 1px solid var(--ink);
+  }
+  .cell:last-child {
+    border-bottom: 0;
+  }
+  .cell.sheetCell {
+    grid-column: 1 / -1;
+    border-right: 0;
+  }
+}
+
+@media (max-width: 560px) {
+  .brandCell,
+  .sloganCell,
+  .navCell,
+  .cell {
+    grid-column: 1 / -1;
+    border-right: 0 !important;
+  }
+}
