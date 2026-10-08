@@ -1,6 +1,6 @@
 import { DrawLine, Rise } from '../../components/ui/Reveal'
 import { SmartImage } from '../../components/ui/SmartImage'
-import { unsplash } from '../../lib/media'
+import { local } from '../../lib/media'
 import s from './Studio.module.css'
 
 const services = [
@@ -10,7 +10,7 @@ const services = [
   { name: 'Diseño interior', text: 'Distribución, mobiliario a la medida, materiales e iluminación.' },
 ]
 
-const studioImage = unsplash('1541888946425-d81bb19240f5', 'Estructura en obra de un proyecto de ARQUON', 4 / 5)
+const studioImage = local('/proyectos/consultorio-odontologico/01.webp', 'Recepción del consultorio odontológico construido por ARQUON', 4 / 5)
 
 export function Studio() {
   return (

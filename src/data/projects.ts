@@ -1,11 +1,10 @@
-import { unsplash, type ImageAsset } from '../lib/media'
+import { local, type ImageAsset } from '../lib/media'
 
 /*
- * PROYECTOS DE MUESTRA
- * Los nombres, datos y fotos son de ejemplo para mostrar el diseño.
- * Reemplázalos por los proyectos reales de ARQUON. Para usar tus fotos:
- *   1. Copia las imágenes a /public/proyectos/<slug>/
- *   2. Cambia unsplash(...) por local('/proyectos/<slug>/foto.webp', 'Descripción', 4 / 3)
+ * PROYECTOS DE ARQUON
+ * Las fotos son reales (carpeta FOTOS). Los textos marcados como "Texto de prueba"
+ * y los datos (año, área, ubicación exacta) son provisionales: reemplázalos por los reales.
+ * Las fotos están en /public/proyectos/<slug>/ numeradas 01.webp, 02.webp…
  */
 
 export type Category = 'Vivienda' | 'Comercial' | 'Interiores'
@@ -16,20 +15,16 @@ export type Project = {
   category: Category
   location: string
   year: number
-  /** Área construida en m² */
+  /** Área en m² */
   area: number
   levels?: number
-  status: 'Construido' | 'En construcción' | 'En diseño'
-  /** Una línea para el hover de la galería */
+  status: 'Construido' | 'En construcción' | 'Diseño'
   summary: string
-  /** Párrafos de la ficha del proyecto */
   description: string[]
-  /** Qué hizo ARQUON en el proyecto */
   scope: string[]
   work: string[]
   cover: ImageAsset
   gallery: (ImageAsset & { caption?: string })[]
-  /** Video opcional para la ficha (por ejemplo, un recorrido generado con IA) */
   video?: { src: string; poster?: string }
 }
 
@@ -37,147 +32,224 @@ export const categories: Category[] = ['Vivienda', 'Comercial', 'Interiores']
 
 export const projects: Project[] = [
   {
-    slug: 'casa-guayacan',
-    name: 'Casa Guayacán',
-    category: 'Vivienda',
-    location: 'Llanogrande, Rionegro',
+    slug: "casa-campestre-llanogrande",
+    name: "Casa Campestre Llanogrande",
+    category: "Vivienda",
+    location: "Llanogrande, Rionegro",
     year: 2025,
-    area: 460,
-    levels: 2,
-    status: 'Construido',
-    summary: 'Una casa de campo que se abre al jardín con aleros profundos y madera local.',
-    description: [
-      'La familia buscaba una casa para vivir todo el año, no una casa de fin de semana. El programa se organizó en dos volúmenes: uno público, abierto al jardín, y otro privado, más recogido hacia el bosque.',
-      'Los aleros profundos protegen las fachadas de la lluvia y el sol de la tarde, y permiten dejar las puertas abiertas casi todo el día. La madera se trabajó con carpinteros de la zona.',
-    ],
-    scope: ['Diseño arquitectónico', 'Licencia de construcción', 'Construcción'],
-    work: [
-      'Levantamiento del lote y estudio de asoleamiento',
-      'Anteproyecto, renders y presupuesto',
-      'Proyecto técnico y trámite ante curaduría',
-      'Construcción y entrega llave en mano',
-    ],
-    cover: unsplash('1600585154340-be6161a56a0c', 'Casa Guayacán, fachada hacia el jardín', 3 / 2),
-    gallery: [
-      { ...unsplash('1600607687644-c7171b42498f', 'Casa Guayacán, sala principal', 3 / 2), caption: 'Sala principal' },
-      { ...unsplash('1600585154526-990dced4db0d', 'Casa Guayacán, cocina y comedor', 3 / 2), caption: 'Cocina y comedor' },
-      { ...unsplash('1541888946425-d81bb19240f5', 'Casa Guayacán durante la obra', 3 / 2), caption: 'Obra, mes cuatro' },
-    ],
-  },
-  {
-    slug: 'edificio-nogal',
-    name: 'Edificio Nogal',
-    category: 'Comercial',
-    location: 'El Poblado, Medellín',
-    year: 2024,
-    area: 3200,
-    levels: 6,
-    status: 'Construido',
-    summary: 'Oficinas y locales en esquina, con una fachada que filtra la luz de la tarde.',
-    description: [
-      'Un lote en esquina con dos frentes muy distintos: una calle comercial con mucho movimiento y una vía residencial tranquila. El edificio responde a cada una con una fachada propia.',
-      'Los primeros pisos se abren a la calle con locales de doble altura. Arriba, las oficinas se protegen con una piel de lamas que reduce la carga térmica sin perder la vista.',
-    ],
-    scope: ['Diseño arquitectónico', 'Licencia de construcción', 'Gerencia de obra'],
-    work: [
-      'Estudio de normativa y cabida del lote',
-      'Diseño arquitectónico y coordinación técnica',
-      'Licencia de construcción',
-      'Gerencia y supervisión de obra',
-    ],
-    cover: unsplash('1487958449943-2429e8be8625', 'Edificio Nogal, fachada principal', 4 / 5),
-    gallery: [
-      { ...unsplash('1486406146926-c627a92ad1ab', 'Edificio Nogal, vista desde la calle', 4 / 5), caption: 'Esquina comercial' },
-      { ...unsplash('1511818966892-d7d671e672a2', 'Edificio Nogal, detalle de fachada', 4 / 5), caption: 'Detalle de lamas' },
-      { ...unsplash('1497366216548-37526070297c', 'Edificio Nogal, planta de oficinas', 3 / 2), caption: 'Planta tipo de oficinas' },
-    ],
-  },
-  {
-    slug: 'casa-ceiba',
-    name: 'Casa Ceiba',
-    category: 'Vivienda',
-    location: 'Envigado, Antioquia',
-    year: 2024,
     area: 380,
-    levels: 3,
-    status: 'Construido',
-    summary: 'Tres niveles escalonados sobre una ladera, con la piscina como mirador.',
-    description: [
-      'El lote tiene una pendiente fuerte. En lugar de nivelarlo, la casa se escalona en tres plataformas que siguen el terreno y reducen el movimiento de tierra.',
-      'Cada nivel tiene su propio exterior: el acceso, la terraza social con piscina y el jardín de las habitaciones.',
-    ],
-    scope: ['Diseño arquitectónico', 'Licencia de construcción', 'Construcción', 'Diseño interior'],
-    work: [
-      'Estudio de suelos y diseño estructural coordinado',
-      'Diseño arquitectónico e interior',
-      'Construcción por etapas',
-    ],
-    cover: unsplash('1613490493576-7fde63acd811', 'Casa Ceiba, terraza y piscina', 3 / 2),
+    levels: 1,
+    status: "En construcción",
+    summary: "Una casa de un nivel con cubiertas planas que se abren al jardín y a las montañas del Oriente.",
+    description: ["Texto de prueba. Una casa campestre de un solo nivel, organizada en volúmenes que rodean un patio con jacuzzi y vegetación tropical.", "Las cubiertas planas con alero en madera protegen las terrazas y permiten que la sala, el comedor y las habitaciones se abran por completo al paisaje."],
+    scope: ["Diseño arquitectónico", "Licencia de construcción", "Construcción"],
+    work: ["Levantamiento del lote", "Anteproyecto y renders", "Proyecto técnico y licencia", "Construcción (en curso)"],
+    cover: local('/proyectos/casa-campestre-llanogrande/06.webp', "Casa Campestre Llanogrande", 1672 / 941),
     gallery: [
-      { ...unsplash('1564013799919-ab600027ffc6', 'Casa Ceiba, vista posterior', 3 / 2), caption: 'Terraza social' },
-      { ...unsplash('1600210492486-724fe5c67fb0', 'Casa Ceiba, sala', 3 / 2), caption: 'Sala con doble altura' },
+      { ...local('/proyectos/casa-campestre-llanogrande/01.webp', "Casa Campestre Llanogrande, imagen 1", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/03.webp', "Casa Campestre Llanogrande, imagen 3", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/11.webp', "Casa Campestre Llanogrande, imagen 11", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/02.webp', "Casa Campestre Llanogrande, imagen 2", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/12.webp', "Casa Campestre Llanogrande, imagen 12", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/13.webp', "Casa Campestre Llanogrande, imagen 13", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/10.webp', "Casa Campestre Llanogrande, imagen 10", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-llanogrande/05.webp', "Casa Campestre Llanogrande, imagen 5", 1672 / 941), caption: "Render" },
     ],
   },
   {
-    slug: 'apartamento-laurel',
-    name: 'Apartamento Laurel',
-    category: 'Interiores',
-    location: 'Laureles, Medellín',
+    slug: "consultorio-odontologico",
+    name: "Consultorio Odontológico",
+    category: "Comercial",
+    location: "Medellín",
+    year: 2025,
+    area: 95,
+    status: "Construido",
+    summary: "Un consultorio cálido y luminoso, con recepción en madera y gabinetes clínicos en vidrio.",
+    description: ["Texto de prueba. Diseño y construcción de un consultorio odontológico dentro de un edificio de oficinas.", "La recepción combina madera, piedra sinterizada e iluminación indirecta. Los gabinetes se separan con divisiones de vidrio esmerilado que dejan pasar la luz natural."],
+    scope: ["Diseño interior", "Adecuación", "Construcción"],
+    work: ["Distribución según normativa de salud", "Diseño de mobiliario a la medida", "Instalaciones eléctricas, hidráulicas y de aire", "Obra y entrega"],
+    cover: local('/proyectos/consultorio-odontologico/04.webp', "Consultorio Odontológico", 2000 / 1500),
+    gallery: [
+      { ...local('/proyectos/consultorio-odontologico/01.webp', "Consultorio Odontológico, imagen 1", 1500 / 2000) },
+      { ...local('/proyectos/consultorio-odontologico/06.webp', "Consultorio Odontológico, imagen 6", 1500 / 2000) },
+      { ...local('/proyectos/consultorio-odontologico/11.webp', "Consultorio Odontológico, imagen 11", 2000 / 1500) },
+      { ...local('/proyectos/consultorio-odontologico/14.webp', "Consultorio Odontológico, imagen 14", 2000 / 1500) },
+      { ...local('/proyectos/consultorio-odontologico/17.webp', "Consultorio Odontológico, imagen 17", 1500 / 2000) },
+      { ...local('/proyectos/consultorio-odontologico/18.webp', "Consultorio Odontológico, imagen 18", 2000 / 1500) },
+      { ...local('/proyectos/consultorio-odontologico/15.webp', "Consultorio Odontológico, imagen 15", 1500 / 2000) },
+    ],
+  },
+  {
+    slug: "casa-campestre-rionegro",
+    name: "Casa Campestre Rionegro",
+    category: "Vivienda",
+    location: "Rionegro, Antioquia",
+    year: 2025,
+    area: 420,
+    levels: 1,
+    status: "Diseño",
+    summary: "Una casa con cubierta en teja de barro, corredores en madera y vista abierta a las montañas.",
+    description: ["Texto de prueba. Una casa campestre que recupera la cubierta en teja de barro de la arquitectura antioqueña y la combina con grandes ventanales.", "Los corredores en madera conectan los espacios sociales con el jardín y una terraza con fogata."],
+    scope: ["Diseño arquitectónico", "Renders"],
+    work: ["Programa de necesidades", "Anteproyecto", "Renders exteriores e interiores"],
+    cover: local('/proyectos/casa-campestre-rionegro/02.webp', "Casa Campestre Rionegro", 1672 / 941),
+    gallery: [
+      { ...local('/proyectos/casa-campestre-rionegro/05.webp', "Casa Campestre Rionegro, imagen 5", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/04.webp', "Casa Campestre Rionegro, imagen 4", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/06.webp', "Casa Campestre Rionegro, imagen 6", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/07.webp', "Casa Campestre Rionegro, imagen 7", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/08.webp', "Casa Campestre Rionegro, imagen 8", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/09.webp', "Casa Campestre Rionegro, imagen 9", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-rionegro/11.webp', "Casa Campestre Rionegro, imagen 11", 1672 / 941), caption: "Render" },
+    ],
+  },
+  {
+    slug: "apartamento-las-brujas",
+    name: "Apartamento Las Brujas",
+    category: "Interiores",
+    location: "Envigado, Antioquia",
+    year: 2025,
+    area: 110,
+    status: "Construido",
+    summary: "Interiorismo completo con celosías en madera, cocina abierta y baños en tonos tierra.",
+    description: ["Texto de prueba. Diseño y ejecución del interiorismo de un apartamento entregado en obra gris.", "Una celosía en madera separa el estudio de la zona social sin cerrar el espacio. La cocina abierta, el comedor en madera y el espejo circular organizan la sala."],
+    scope: ["Diseño interior", "Mobiliario a la medida", "Obra"],
+    work: ["Diseño de cocina, baños y estudio", "Fabricación de carpintería", "Instalación y acabados"],
+    cover: local('/proyectos/apartamento-las-brujas/23.webp', "Apartamento Las Brujas", 2000 / 1500),
+    gallery: [
+      { ...local('/proyectos/apartamento-las-brujas/04.webp', "Apartamento Las Brujas, imagen 4", 2000 / 1500) },
+      { ...local('/proyectos/apartamento-las-brujas/13.webp', "Apartamento Las Brujas, imagen 13", 2000 / 1500) },
+      { ...local('/proyectos/apartamento-las-brujas/12.webp', "Apartamento Las Brujas, imagen 12", 2000 / 1500) },
+      { ...local('/proyectos/apartamento-las-brujas/05.webp', "Apartamento Las Brujas, imagen 5", 1500 / 2000) },
+      { ...local('/proyectos/apartamento-las-brujas/07.webp', "Apartamento Las Brujas, imagen 7", 1500 / 2000) },
+      { ...local('/proyectos/apartamento-las-brujas/21.webp', "Apartamento Las Brujas, imagen 21", 2000 / 1500) },
+      { ...local('/proyectos/apartamento-las-brujas/22.webp', "Apartamento Las Brujas, imagen 22", 2000 / 1500) },
+      { ...local('/proyectos/apartamento-las-brujas/10.webp', "Apartamento Las Brujas, imagen 10", 2000 / 1500) },
+    ],
+  },
+  {
+    slug: "cafeteria-penol",
+    name: "Cafetería El Peñol",
+    category: "Comercial",
+    location: "El Peñol, Antioquia",
     year: 2025,
     area: 140,
-    status: 'Construido',
-    summary: 'Una remodelación que unió cocina y sala para ganar luz y espacio.',
-    description: [
-      'Un apartamento de los años ochenta con espacios cerrados y poca luz. Retiramos los muros no estructurales para unir cocina, comedor y sala en un solo espacio.',
-      'La paleta es corta: roble, piedra clara y blanco. Los muebles se diseñaron a la medida para aprovechar cada rincón.',
-    ],
-    scope: ['Diseño interior', 'Remodelación'],
-    work: ['Levantamiento y diagnóstico', 'Diseño interior y mobiliario a la medida', 'Remodelación en 10 semanas'],
-    cover: unsplash('1618221195710-dd6b41faaea6', 'Apartamento Laurel, sala', 4 / 5),
+    status: "Construido",
+    summary: "Una cafetería con barra iluminada, ladrillo a la vista y una zona de mesas para quedarse.",
+    description: ["Texto de prueba. Diseño y construcción de una cafetería con vitrina de postres, zona de mesas y baños.", "El diseño se presentó con renders y se llevó a obra: la barra en verde, la iluminación lineal y el ladrillo a la vista definen el espacio."],
+    scope: ["Diseño interior", "Renders", "Construcción"],
+    work: ["Diseño y renders", "Fabricación de barra y mobiliario", "Obra y montaje"],
+    cover: local('/proyectos/cafeteria-penol/05.webp', "Cafetería El Peñol", 1600 / 900),
     gallery: [
-      { ...unsplash('1600566753190-17f0baa2a6c3', 'Apartamento Laurel, espacio social', 3 / 2), caption: 'Espacio social integrado' },
-      { ...unsplash('1600573472550-8090b5e0745e', 'Apartamento Laurel, detalle de interiores', 3 / 2), caption: 'Mobiliario a la medida' },
+      { ...local('/proyectos/cafeteria-penol/06.webp', "Cafetería El Peñol, imagen 6", 1600 / 900), caption: "Render del diseño" },
+      { ...local('/proyectos/cafeteria-penol/04.webp', "Cafetería El Peñol, imagen 4", 2000 / 1500), caption: "Obra terminada" },
+      { ...local('/proyectos/cafeteria-penol/09.webp', "Cafetería El Peñol, imagen 9", 1600 / 900), caption: "Render de baños" },
+      { ...local('/proyectos/cafeteria-penol/07.webp', "Cafetería El Peñol, imagen 7", 1600 / 900), caption: "Render de baños" },
     ],
   },
   {
-    slug: 'casa-yarumo',
-    name: 'Casa Yarumo',
-    category: 'Vivienda',
-    location: 'Santa Elena, Medellín',
-    year: 2023,
-    area: 290,
-    levels: 2,
-    status: 'Construido',
-    summary: 'Una casa compacta en medio del bosque, pensada para el clima frío.',
-    description: [
-      'A 2.500 metros de altura, el reto era el frío. La casa se compacta alrededor de una chimenea central y se abre al sur para recibir el sol de la mañana.',
-      'Los materiales se eligieron por su comportamiento térmico y por su bajo mantenimiento: concreto, madera y vidrio de doble cámara.',
-    ],
-    scope: ['Diseño arquitectónico', 'Construcción'],
-    work: ['Diseño bioclimático', 'Proyecto arquitectónico', 'Construcción'],
-    cover: unsplash('1600047509807-ba8f99d2cdde', 'Casa Yarumo, fachada', 3 / 2),
+    slug: "consultorio-estetico",
+    name: "Consultorio Estético",
+    category: "Comercial",
+    location: "Medellín",
+    year: 2025,
+    area: 60,
+    status: "Construido",
+    summary: "Un consultorio de estética con recepción iluminada y gabinetes separados en vidrio.",
+    description: ["Texto de prueba. Construcción de un consultorio de medicina estética en un local comercial.", "La recepción usa un marco de luz LED y la sala de espera se resuelve con pocos elementos. Los gabinetes se separan con puertas en vidrio y perfilería negra."],
+    scope: ["Diseño interior", "Construcción"],
+    work: ["Adecuación del local", "Mobiliario de recepción", "Iluminación y acabados"],
+    cover: local('/proyectos/consultorio-estetico/08.webp', "Consultorio Estético", 2000 / 1500),
     gallery: [
-      { ...unsplash('1600607687644-c7171b42498f', 'Casa Yarumo, interior', 3 / 2), caption: 'Estar con chimenea' },
+      { ...local('/proyectos/consultorio-estetico/06.webp', "Consultorio Estético, imagen 6", 2000 / 1500) },
+      { ...local('/proyectos/consultorio-estetico/02.webp', "Consultorio Estético, imagen 2", 1500 / 2000) },
+      { ...local('/proyectos/consultorio-estetico/04.webp', "Consultorio Estético, imagen 4", 2000 / 1500) },
+      { ...local('/proyectos/consultorio-estetico/09.webp', "Consultorio Estético, imagen 9", 1500 / 2000) },
     ],
   },
   {
-    slug: 'oficinas-arrayan',
-    name: 'Oficinas Arrayán',
-    category: 'Interiores',
-    location: 'Ciudad del Río, Medellín',
-    year: 2023,
-    area: 620,
-    status: 'Construido',
-    summary: 'Un piso de oficinas abierto, con salas de reunión que se pueden cerrar o integrar.',
-    description: [
-      'Una empresa en crecimiento necesitaba un espacio que cambiara con ella. Diseñamos un piso abierto con salas que se cierran con paneles corredizos.',
-      'La iluminación y la acústica se resolvieron desde el techo para dejar el piso libre.',
-    ],
-    scope: ['Diseño interior', 'Adecuación'],
-    work: ['Programa de áreas con el equipo del cliente', 'Diseño interior, acústico y de iluminación', 'Adecuación en obra'],
-    cover: unsplash('1497366216548-37526070297c', 'Oficinas Arrayán, área de trabajo', 4 / 3),
+    slug: "casa-campestre-guatape",
+    name: "Casa Campestre Guatapé",
+    category: "Vivienda",
+    location: "Guatapé, Antioquia",
+    year: 2025,
+    area: 300,
+    levels: 1,
+    status: "Diseño",
+    summary: "Una casa frente al embalse, con chimenea en piedra, techos en madera y jacuzzi en la terraza.",
+    description: ["Texto de prueba. Diseño interior y arquitectónico de una casa de descanso con vista al embalse de Guatapé.", "La sala gira alrededor de una chimenea en piedra. Los techos en madera y los muros en concreto dan calidez, y la terraza con jacuzzi mira al agua."],
+    scope: ["Diseño arquitectónico", "Diseño interior", "Renders"],
+    work: ["Anteproyecto", "Diseño interior", "Renders"],
+    cover: local('/proyectos/casa-campestre-guatape/08.webp', "Casa Campestre Guatapé", 1410 / 842),
     gallery: [
-      { ...unsplash('1511818966892-d7d671e672a2', 'Oficinas Arrayán, detalle', 4 / 5), caption: 'Detalle de cielo raso' },
+      { ...local('/proyectos/casa-campestre-guatape/04.webp', "Casa Campestre Guatapé, imagen 4", 796 / 718), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-guatape/06.webp', "Casa Campestre Guatapé, imagen 6", 1550 / 922), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-guatape/02.webp', "Casa Campestre Guatapé, imagen 2", 1544 / 919), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-guatape/09.webp', "Casa Campestre Guatapé, imagen 9", 1280 / 845), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-guatape/07.webp', "Casa Campestre Guatapé, imagen 7", 1540 / 922), caption: "Render" },
+    ],
+  },
+  {
+    slug: "apartamento-puerto-vallarta",
+    name: "Apartamento Puerto Vallarta",
+    category: "Interiores",
+    location: "Puerto Vallarta",
+    year: 2025,
+    area: 55,
+    status: "Diseño",
+    summary: "Un apartamento compacto con cocina abierta, madera clara y luz cálida.",
+    description: ["Texto de prueba. Propuesta de interiorismo para un apartamento pequeño, pensado para aprovechar cada metro.", "Una paleta corta de madera clara, piedra y beige unifica la cocina, la sala y las habitaciones."],
+    scope: ["Diseño interior", "Renders"],
+    work: ["Distribución", "Diseño de mobiliario", "Renders"],
+    cover: local('/proyectos/apartamento-puerto-vallarta/01.webp', "Apartamento Puerto Vallarta", 1600 / 900),
+    gallery: [
+      { ...local('/proyectos/apartamento-puerto-vallarta/03.webp', "Apartamento Puerto Vallarta, imagen 3", 1600 / 900), caption: "Render" },
+      { ...local('/proyectos/apartamento-puerto-vallarta/04.webp', "Apartamento Puerto Vallarta, imagen 4", 1600 / 900), caption: "Render" },
+      { ...local('/proyectos/apartamento-puerto-vallarta/05.webp', "Apartamento Puerto Vallarta, imagen 5", 1600 / 900), caption: "Render" },
+      { ...local('/proyectos/apartamento-puerto-vallarta/06.webp', "Apartamento Puerto Vallarta, imagen 6", 1600 / 900), caption: "Render" },
+      { ...local('/proyectos/apartamento-puerto-vallarta/07.webp', "Apartamento Puerto Vallarta, imagen 7", 1600 / 900), caption: "Render" },
+    ],
+  },
+  {
+    slug: "casa-campestre-gomez-plata",
+    name: "Casa Campestre Gómez Plata",
+    category: "Vivienda",
+    location: "Gómez Plata, Antioquia",
+    year: 2025,
+    area: 350,
+    levels: 1,
+    status: "Diseño",
+    summary: "Una casa lineal con muros en piedra y un gran espacio social abierto al valle.",
+    description: ["Texto de prueba. Una casa de un nivel que se extiende a lo largo del lote, con muros en piedra y cubierta plana.", "La cocina, el comedor y la sala forman un solo espacio bajo vigas de madera, que se abre por completo hacia la terraza."],
+    scope: ["Diseño arquitectónico", "Renders"],
+    work: ["Anteproyecto", "Renders exteriores e interiores"],
+    cover: local('/proyectos/casa-campestre-gomez-plata/01.webp', "Casa Campestre Gómez Plata", 1672 / 941),
+    gallery: [
+      { ...local('/proyectos/casa-campestre-gomez-plata/02.webp', "Casa Campestre Gómez Plata, imagen 2", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-gomez-plata/03.webp', "Casa Campestre Gómez Plata, imagen 3", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-gomez-plata/04.webp', "Casa Campestre Gómez Plata, imagen 4", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-gomez-plata/06.webp', "Casa Campestre Gómez Plata, imagen 6", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-gomez-plata/07.webp', "Casa Campestre Gómez Plata, imagen 7", 1672 / 941), caption: "Render" },
+      { ...local('/proyectos/casa-campestre-gomez-plata/08.webp', "Casa Campestre Gómez Plata, imagen 8", 1672 / 941), caption: "Render" },
+    ],
+  },
+  {
+    slug: "consultorio-muestras",
+    name: "Consultorio de Toma de Muestras",
+    category: "Comercial",
+    location: "Medellín",
+    year: 2025,
+    area: 40,
+    status: "Diseño",
+    summary: "Un espacio pequeño para toma de muestras, con recepción, sala de espera y cubículo.",
+    description: ["Texto de prueba. Diseño de un consultorio compacto para toma de muestras de laboratorio.", "Madera, concreto y luz indirecta hacen que un espacio clínico pequeño se sienta tranquilo."],
+    scope: ["Diseño interior", "Renders"],
+    work: ["Distribución", "Diseño de mobiliario", "Renders"],
+    cover: local('/proyectos/consultorio-muestras/02.webp', "Consultorio de Toma de Muestras", 1280 / 720),
+    gallery: [
+      { ...local('/proyectos/consultorio-muestras/01.webp', "Consultorio de Toma de Muestras, imagen 1", 1280 / 720), caption: "Render" },
+      { ...local('/proyectos/consultorio-muestras/03.webp', "Consultorio de Toma de Muestras, imagen 3", 1280 / 720), caption: "Render" },
+      { ...local('/proyectos/consultorio-muestras/04.webp', "Consultorio de Toma de Muestras, imagen 4", 1280 / 720), caption: "Render" },
     ],
   },
 ]

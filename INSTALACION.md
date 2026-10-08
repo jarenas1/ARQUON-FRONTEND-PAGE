@@ -1,19 +1,20 @@
 # ARQUON — instalación y configuración
 
-Guía técnica para instalar, configurar y publicar el sitio de **ARQUON**.
-Para la memoria del **proceso de desarrollo** (metodología, IA, MCPs), ver [`README.md`](./README.md).
+Sitio de una sola página para **ARQUON**, estudio de arquitectura y construcción.
+*Tu visión, nuestra realidad.*
 
-**Producción:** <https://arquon-frontend-page.vercel.app/>
-
-React 19 + TypeScript + Vite. Sin backend: el formulario se envía a Formspree y el contacto directo va por WhatsApp.
+React 19 + TypeScript + Vite. Sin backend: el formulario llega al correo vía FormSubmit y el contacto directo va por WhatsApp.
 
 ---
 
 ## Empezar
 
+**En Mac, lo más rápido:** doble clic en `Iniciar ARQUON.command`. Instala las dependencias la primera vez, levanta el servidor y abre el sitio en el navegador. Deja la ventana de Terminal abierta mientras lo usas.
+
+O desde la terminal:
+
 ```bash
 npm install
-cp .env.example .env      # completa el número de WhatsApp y el ID de Formspree
 npm run dev               # http://localhost:5173
 ```
 
@@ -31,27 +32,17 @@ Requiere Node 20 o superior.
 ## Lo que tienes que configurar
 
 ### 1. WhatsApp
-En `.env`:
-```
-VITE_WHATSAPP_NUMBER=573001234567
-```
-Formato internacional, sin `+` ni espacios. El mensaje que llega prellenado se cambia en `src/config/site.ts` (`whatsappMessage`).
+El número (+57 312 882 3725) está en `src/config/site.ts`. El mensaje que llega prellenado se cambia en `src/config/site.ts` (`whatsappMessage`).
 
-### 2. Formulario (Formspree)
-1. Crea una cuenta gratuita en <https://formspree.io>.
-2. Crea un formulario nuevo y copia su ID (la parte final de `https://formspree.io/f/xxxxxxxx`).
-3. Pégalo en `.env`:
-   ```
-   VITE_FORMSPREE_ID=xxxxxxxx
-   ```
-4. En el panel de Formspree, en *Settings → Restrict to domain*, pon el dominio del sitio para evitar envíos desde otros lugares.
+### 2. Formulario (FormSubmit)
+Las solicitudes llegan al correo configurado en `src/config/site.ts` (`formEmail`) usando [FormSubmit](https://formsubmit.co), sin backend ni cuenta.
 
-El formulario envía: nombre, correo, teléfono, tipo de proyecto, ubicación, mensaje y la autorización de datos. Tiene validación, campo trampa contra bots (`_gotcha`) y mensajes de error que ofrecen WhatsApp como alternativa.
+**Activación (una sola vez):** después de publicar el sitio, envía una solicitud de prueba desde el formulario. FormSubmit manda un correo de activación a esa dirección; ábrelo y confirma. Desde ese momento llegan todas las solicitudes, en formato de tabla.
 
-Mientras no haya ID, el formulario avisa que aún no está conectado y ofrece WhatsApp.
+Tiene validación, campo trampa contra bots (`_honey`) y, si algo falla, ofrece WhatsApp como alternativa.
 
 ### 3. Datos de la empresa
-Todo está en **`src/config/site.ts`**: nombre, eslogan, correo, teléfono, dirección, horario, redes y el hero.
+Todo está en **`src/config/site.ts`**: nombre, eslogan, WhatsApp, dirección, horario, redes y el hero.
 
 ### 4. Proyectos y fotos
 Los proyectos están en **`src/data/projects.ts`**. Los que vienen son **de muestra** (nombres y fotos de Unsplash) para ver el diseño: reemplázalos por los reales.
@@ -99,7 +90,7 @@ Para los proyectos también puedes agregar un video (por ejemplo un recorrido) c
 
 Es un sitio estático: sube la carpeta `dist/` a cualquier hosting.
 
-- **Vercel**: importa el repositorio, framework *Vite*. Agrega las variables de `.env` en *Settings → Environment Variables*. `vercel.json` ya está incluido para que funcionen las URLs de los proyectos.
+- **Vercel**: importa el repositorio, framework *Vite*. `vercel.json` ya está incluido para que funcionen las URLs de los proyectos.
 - **Netlify**: build `npm run build`, carpeta `dist`. El archivo `public/_redirects` ya está incluido.
 
 Cuando tengas dominio, actualiza en `index.html` la imagen para redes (`og:image`) con la URL completa.
@@ -137,7 +128,7 @@ Cuando tengas dominio, actualiza en `index.html` la imagen para redes (`og:image
 
 ```
 src/
-├── config/site.ts              Datos de la empresa, WhatsApp, Formspree y hero
+├── config/site.ts              Datos de la empresa, WhatsApp, correo del formulario y hero
 ├── data/
 │   ├── projects.ts             Proyectos (contenido de muestra)
 │   └── process.ts              Pasos del proceso

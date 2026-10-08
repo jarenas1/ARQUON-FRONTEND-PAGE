@@ -2,7 +2,7 @@
  * Configuración general del sitio.
  * Todo lo que es dato de la empresa vive aquí: cámbialo y se actualiza en todo el sitio.
  *
- * Los valores sensibles al despliegue (WhatsApp y Formspree) se leen de variables
+ * Los valores sensibles al despliegue (WhatsApp y correo del formulario) se leen de variables
  * de entorno (archivo .env). Mira .env.example.
  */
 const env = import.meta.env
@@ -17,19 +17,21 @@ export const site = {
   city: 'Medellín, Colombia',
 
   contact: {
-    email: 'hola@arquon.co',
-    phoneDisplay: '+57 300 000 0000',
-    phoneHref: 'tel:+573000000000',
+    phoneDisplay: '+57 312 882 3725',
+    phoneHref: 'tel:+573128823725',
     address: 'Medellín, Colombia',
     hours: 'Lunes a viernes, 8:00\u00a0a.\u00a0m. a 6:00\u00a0p.\u00a0m.',
   },
 
   /** Número en formato internacional sin "+" ni espacios. Ej: 573001234567 */
-  whatsappNumber: (env.VITE_WHATSAPP_NUMBER as string | undefined) ?? '570000000000',
+  whatsappNumber: (env.VITE_WHATSAPP_NUMBER as string | undefined) || '573128823725',
   whatsappMessage: 'Hola, ARQUON. Quiero contarles sobre mi proyecto.',
 
-  /** ID del formulario en Formspree (la parte final de https://formspree.io/f/XXXXXXXX). */
-  formspreeId: (env.VITE_FORMSPREE_ID as string | undefined) ?? '',
+  /**
+   * Correo que recibe las solicitudes del formulario (vía FormSubmit, sin backend).
+   * La primera solicitud llega como un correo de activación: hay que confirmarlo una vez.
+   */
+  formEmail: (env.VITE_FORM_EMAIL as string | undefined) || 'juanjoarenas1218@gmail.com',
 
   /** Deja vacío lo que no uses y no aparecerá. */
   social: [
@@ -45,8 +47,8 @@ export const site = {
    * Pon los archivos en /public/media/ y usa rutas como '/media/hero.mp4'.
    */
   hero: {
-    image: 'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2400&q=80',
-    imageAlt: 'Casa contemporánea con piscina al atardecer',
+    image: '/proyectos/casa-campestre-llanogrande/06.webp',
+    imageAlt: 'Render de la Casa Campestre Llanogrande',
     video: undefined as { mp4?: string; webm?: string } | undefined,
   },
 } as const

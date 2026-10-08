@@ -188,7 +188,7 @@ export function Header() {
               <a href={whatsappHref()} target="_blank" rel="noopener noreferrer">
                 WhatsApp
               </a>
-              <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+              <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a>
             </div>
           </motion.div>
         )}

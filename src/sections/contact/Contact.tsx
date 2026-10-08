@@ -19,15 +19,11 @@ export function Contact() {
 
           <dl className={s.details}>
             <div>
-              <dt>Correo</dt>
+              <dt>WhatsApp</dt>
               <dd>
-                <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-              </dd>
-            </div>
-            <div>
-              <dt>Teléfono</dt>
-              <dd>
-                <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a>
+                <a href={whatsappHref()} target="_blank" rel="noopener noreferrer">
+                  {site.contact.phoneDisplay}
+                </a>
               </dd>
             </div>
             <div>

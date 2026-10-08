@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'motion/react'
 import { useId, useRef, useState, type FormEvent } from 'react'
 import { site, whatsappHref } from '../../config/site'
-import { useFormspree } from './useFormspree'
+import { useFormSubmit } from './useFormSubmit'
 import s from './Contact.module.css'
 
 const PROJECT_TYPES = ['Vivienda', 'Comercial', 'Interiores', 'Remodelación', 'Otro']
@@ -14,7 +14,7 @@ const FIELD: Record<keyof Errors, string> = { name: 'nombre', email: 'email', co
 
 export function ContactForm() {
   const formRef = useRef<HTMLFormElement>(null)
-  const { status, error, submit, reset } = useFormspree(site.formspreeId)
+  const { status, error, submit, reset } = useFormSubmit(site.formEmail)
   const [errors, setErrors] = useState<Errors>({})
   const uid = useId()
   const id = (name: string) => `${uid}-${name}`
@@ -82,8 +82,10 @@ export function ContactForm() {
       }}
     >
       <input type="hidden" name="_subject" value="Nueva solicitud desde el sitio de ARQUON" />
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
       {/* Campo trampa para bots: las personas no lo ven */}
-      <input type="text" name="_gotcha" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
+      <input type="text" name="_honey" tabIndex={-1} autoComplete="off" className="visually-hidden" aria-hidden="true" />
 
       <div className={s.field}>
         <label htmlFor={id('name')}>Nombre</label>

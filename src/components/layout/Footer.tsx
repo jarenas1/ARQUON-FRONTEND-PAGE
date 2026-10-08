@@ -54,9 +54,6 @@ export function Footer() {
             <span className={s.label}>Contacto</span>
             <ul className={s.list}>
               <li>
-                <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
-              </li>
-              <li>
                 <a href={site.contact.phoneHref}>{site.contact.phoneDisplay}</a>
               </li>
               <li>

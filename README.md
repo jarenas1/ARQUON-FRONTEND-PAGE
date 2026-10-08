@@ -23,7 +23,7 @@ prácticas, y el **MCP de Higgsfield** para la generación del logo, las imágen
 | **Librerías** | `motion` (animaciones), `lenis` (scroll suave), `react-router` (URL por proyecto), `@fontsource-variable/*` |
 | **Paleta** | Blanco `#FFFFFF`, negro `#000000`, olivo `#3B3F24` · `#5F6438` · `#A2A57C` · bruma `#E7E8DE` |
 | **Tipografía** | Jost (titulares, herencia Bauhaus del wordmark) · Newsreader (cuerpo, serif del eslogan) |
-| **Sin backend** | Formulario vía Formspree + contacto por WhatsApp |
+| **Sin backend** | Formulario vía FormSubmit (llega al correo) + contacto por WhatsApp |
 | **Despliegue** | Vercel |
 | **Herramienta** | Claude Code (agente orquestador + subagentes) |
 | **MCP** | Higgsfield (logo, imágenes, video del hero) |
