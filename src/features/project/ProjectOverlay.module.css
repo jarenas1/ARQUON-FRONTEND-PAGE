@@ -149,11 +149,11 @@
 }
 
 .summary {
-  font-size: var(--step-3);
+  font-size: var(--step-2);
   font-weight: 330;
-  line-height: 1.12;
-  letter-spacing: -0.02em;
-  max-width: 20em;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  max-width: 34em;
 }
 
 .prose {

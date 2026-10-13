@@ -171,6 +171,10 @@
   font-size: 1.0625rem;
   line-height: 1.45;
   transition-delay: 120ms;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .more {

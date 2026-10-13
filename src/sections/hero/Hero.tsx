@@ -209,7 +209,7 @@ export function Hero() {
               style={{ opacity: captionOpacity, y: captionY }}
               inert={tone === 'light'}
             >
-              <p className={s.captionText}>Diseñamos tu proyecto y lo construimos con el mismo equipo.</p>
+              <p className={s.captionText}>Diseñamos espacios a tu medida y materializamos tus ideas.</p>
               <button type="button" className={s.captionLink} onClick={() => scrollToId('proyectos')}>
                 Ver proyectos
               </button>

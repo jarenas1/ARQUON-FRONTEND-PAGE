@@ -56,6 +56,13 @@
   padding-top: clamp(0px, 8vw, 140px);
 }
 
+.proseTitle {
+  margin-bottom: 20px;
+  font-size: var(--step-2);
+  font-weight: 380;
+  letter-spacing: -0.015em;
+}
+
 .prose {
   display: grid;
   gap: 1.1em;

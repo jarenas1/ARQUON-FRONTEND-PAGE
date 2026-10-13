@@ -156,21 +156,23 @@ export function ProjectOverlay({ project }: Props) {
 
                 <div className={s.work}>
                   <div>
-                    <h3 className={s.subhead}>Alcance</h3>
+                    <h3 className={s.subhead}>Qué hicimos</h3>
                     <ul className={s.tags}>
                       {project.scope.map((item) => (
                         <li key={item}>{item}</li>
                       ))}
                     </ul>
                   </div>
-                  <div>
-                    <h3 className={s.subhead}>Qué hicimos</h3>
-                    <ol className={s.steps}>
-                      {project.work.map((item) => (
-                        <li key={item}>{item}</li>
-                      ))}
-                    </ol>
-                  </div>
+                  {project.work.length > 0 && (
+                    <div>
+                      <h3 className={s.subhead}>Proceso</h3>
+                      <ol className={s.steps}>
+                        {project.work.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ol>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

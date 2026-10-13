@@ -22,8 +22,9 @@ export function Studio() {
             Estudio
           </h2>
           <p className={s.statement}>
-            Somos un estudio de arquitectura que también construye. Dibujamos lo que imaginas y lo levantamos con el
-            mismo equipo, para que nada se pierda entre el plano y la obra.
+            Somos un estudio de arquitectura que diseña y construye. Un equipo interdisciplinario que transforma tus
+            ideas y sueños en espacios únicos, acompañando cada proyecto desde su concepción hasta su materialización,
+            con la convicción de que cada detalle imaginado cobre vida.
           </p>
         </div>
 
@@ -38,14 +39,17 @@ export function Studio() {
           </figure>
 
           <div className={s.text}>
+            <h3 className={s.proseTitle}>Del concepto a la realidad</h3>
             <div className={`serif ${s.prose}`}>
               <p>
-                Cada proyecto empieza con una conversación: cómo vives, cómo trabajas, qué presupuesto manejas y cómo
-                es tu lote. Con eso proponemos, ajustamos y dibujamos hasta que el diseño sea tuyo.
+                Cada proyecto comienza con una conversación. Escuchamos tus ideas, entendemos tu estilo de vida, tus
+                necesidades y las particularidades de cada espacio. A partir de ahí, nuestro equipo interdisciplinario
+                transforma tus expectativas en una propuesta arquitectónica única, integrando diseño, funcionalidad y
+                viabilidad.
               </p>
               <p>
-                Después lo construimos. Tienes un solo interlocutor desde el anteproyecto hasta la entrega de llaves,
-                con costos y tiempos que conoces desde el principio.
+                Diseñamos y construimos bajo una misma visión, acompañándote desde el primer boceto hasta la entrega
+                final, con transparencia en costos, tiempos y procesos.
               </p>
             </div>
 
